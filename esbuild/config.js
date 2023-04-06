@@ -8,7 +8,7 @@ const isProd = MODE == 'prod';
 
 module.exports = {
 	outdir: path.resolve(__dirname, '..', 'build'),
-	entryPoints: [ path.resolve(__dirname, '..', 'src', 'AppMain') ],
+	entryPoints: [ path.resolve(__dirname, '..', 'test', 'AppMain') ],
 	entryNames: 'bundle',
 	allowOverwrite: true,
 	bundle: true,

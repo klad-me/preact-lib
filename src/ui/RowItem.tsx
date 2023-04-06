@@ -1,5 +1,5 @@
 import S from './RowItem.module.scss';
-import { useEvent, Event } from 'hooks';
+import { useEvent, Event } from '../hooks';
 import { ComponentChildren, toChildArray, VNode } from 'preact';
 
 

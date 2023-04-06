@@ -3,7 +3,7 @@ import S from './Popup.module.scss';
 import { ComponentChild, VNode } from 'preact';
 import { useState } from 'preact/hooks';
 import { useScreenBlank } from './ScreenBlank';
-import { Event } from 'hooks';
+import { Event } from '../hooks';
 import clsx from 'clsx';
 
 

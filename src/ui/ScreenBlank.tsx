@@ -2,7 +2,7 @@ import S from './ScreenBlank.module.scss';
 
 import { useState, useEffect } from 'preact/hooks';
 import clsx from 'clsx';
-import { Event } from 'hooks';
+import { Event } from '../hooks';
 
 
 const ev = new Event<boolean>();

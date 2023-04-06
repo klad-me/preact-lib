@@ -1,11 +1,10 @@
 {
 	"compilerOptions": {
-		"baseUrl": "src",
-		"rootDir": "src",
+		"baseUrl": "./",
+		"rootDir": "./",
 		"paths": {
-			"*": [
-				"*",
-				"ui/*"
+			"@preact-lib/*": [
+				"src/*"
 			]
 		},
 		"jsx": "react-jsx",

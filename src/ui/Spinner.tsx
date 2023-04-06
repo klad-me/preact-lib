@@ -1,7 +1,7 @@
 import S from './Spinner.module.scss';
 
 import { useEffect, useState } from 'preact/hooks';
-import { Event } from 'hooks';
+import { Event } from '../hooks';
 import { useScreenBlank } from './ScreenBlank';
 import clsx from 'clsx';
 

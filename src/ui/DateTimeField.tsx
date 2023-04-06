@@ -1,7 +1,7 @@
-import { zeroPad } from 'utils';
+import { zeroPad } from '../utils';
 import { TextField } from './TextField';
 import { useCallback } from 'preact/hooks';
-import { Event } from 'hooks';
+import { Event } from '../hooks';
 
 
 const daysInMonth = [ 31,28,31,30,31,30,31,31,30,31,30,31 ];

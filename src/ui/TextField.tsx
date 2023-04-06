@@ -2,7 +2,7 @@ import S from './TextField.module.scss';
 import { VNode } from 'preact';
 import { useRef, useState, useCallback, useEffect } from 'preact/hooks';
 import { popup } from './Popup';
-import { Event, useTimeout } from 'hooks';
+import { Event, useTimeout } from '../hooks';
 import clsx from 'clsx';
 
 

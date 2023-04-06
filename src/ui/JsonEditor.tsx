@@ -1,14 +1,14 @@
 import S from './JsonEditor.module.scss';
 
-import { JsonObjectSchema, JsonArraySchema, JsonValueSchema } from 'types';
+import { JsonObjectSchema, JsonArraySchema, JsonValueSchema } from '../types';
 import { useCallback, useContext, useEffect, useState } from 'preact/hooks';
 import { ComponentChildren, createContext, VNode } from 'preact';
-import { useEvent, Event } from 'hooks';
+import { useEvent, Event } from '../hooks';
 import { TextField } from './TextField';
 import { NumberField } from './NumberField';
 import { SelectField } from './SelectField';
 import { BitsField } from './BitsField';
-import { EvalExpr } from 'utils';
+import { EvalExpr } from '../utils';
 
 
 const rightArrow='\u25B7', downArrow='\u25BD';

@@ -1,6 +1,6 @@
 import S from './SelectField.module.scss';
 import { useRef, useState, useCallback, useEffect } from 'preact/hooks';
-import { Event, useTimeout } from 'hooks';
+import { Event, useTimeout } from '../hooks';
 import clsx from 'clsx';
 
 

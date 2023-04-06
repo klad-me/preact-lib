@@ -1,6 +1,6 @@
 import S from './BitsField.module.scss';
 import clsx from 'clsx';
-import { BV } from 'utils';
+import { BV } from '../utils';
 
 
 export type BitsFieldOnInput = (value: number) => void;

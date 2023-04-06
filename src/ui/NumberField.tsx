@@ -1,6 +1,6 @@
 import { useCallback } from 'preact/hooks';
 import { TextField, TextFieldOnInput, TextFieldValidator } from './TextField';
-import { Event } from 'hooks';
+import { Event } from '../hooks';
 
 
 export type NumberFieldValidator = (value: number) => boolean;

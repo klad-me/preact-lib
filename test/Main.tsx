@@ -1,12 +1,12 @@
 import S from './Main.module.scss';
-import { CX, CustomPopupProps, TextField } from 'ui';
+import { CX, CustomPopupProps, TextField } from '@preact-lib/ui';
 import { useState, useCallback, useEffect } from 'preact/hooks';
-import { Panel, ProgressBar, getUiTheme, setUiTheme, GridContainer, GridPadding, LocalFileReader, RowItem } from 'ui';
-import { ScreenBlankElement, PopupElement, popup, ask, customPopup, SpinnerElement, useSpinner, NumberField, IPField } from 'ui';
-import { SelectField, BitsField, TabContainer, Tab, DateField, TimeField, DateTimeField, UnixTimeField, HHMMField, JsonEditor } from 'ui';
-import { Screen } from 'ui';
-import { useTimeout, useOrientation } from 'hooks';
-import { JsonObjectSchema } from 'types';
+import { Panel, ProgressBar, getUiTheme, setUiTheme, GridContainer, GridPadding, LocalFileReader, RowItem } from '@preact-lib/ui';
+import { ScreenBlankElement, PopupElement, popup, ask, customPopup, SpinnerElement, useSpinner, NumberField, IPField } from '@preact-lib/ui';
+import { SelectField, BitsField, TabContainer, Tab, DateField, TimeField, DateTimeField, UnixTimeField, HHMMField, JsonEditor } from '@preact-lib/ui';
+import { Screen } from '@preact-lib/ui';
+import { useTimeout, useOrientation } from '@preact-lib/hooks';
+import { JsonObjectSchema } from '@preact-lib/types';
 
 
 function MyCustomPopup({onClose}: CustomPopupProps)
