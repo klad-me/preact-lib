@@ -1,0 +1,25 @@
+{
+  "name": "webapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "MODE=dev node esbuild/dev-server.js",
+    "build": "MODE=dev node esbuild/build.js",
+    "build:prod": "MODE=prod node esbuild/build.js"
+  },
+  "author": "klad.me",
+  "license": "ISC",
+  "dependencies": {
+    "clsx": "^1.2.1",
+    "mitt": "^3.0.0",
+    "preact": "^10.11.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.6",
+    "esbuild": "^0.15.8",
+    "esbuild-plugin-postcss2": "^0.1.2",
+    "sass": "^1.56.1",
+    "typescript-plugin-css-modules": "^5.0.0"
+  }
+}

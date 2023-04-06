@@ -1,0 +1,40 @@
+.tabs {
+	display: block;
+}
+
+
+.tab-buttons {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 0;
+	font-size: 1.2rem;
+	background-color: var(--clr-tabs-background);
+
+	--margin: 1rem;
+
+	&.top {
+		margin-bottom: var(--margin);
+	}
+
+	&.bottom {
+		margin-top: var(--margin);
+	}
+}
+
+
+.tab-button {
+	padding: 0.2rem 1.5rem;
+	background-color: var(--clr-tabs-inactive);
+	cursor: pointer;
+
+	&:hover {
+		filter: brightness(125%);
+	}
+		
+	&.selected {
+		border: 1px solid var(--clr-text);
+		background-image: linear-gradient(var(--clr-button-gradient-from) 20%, var(--clr-button-gradient-to) 80%);
+		filter: none !important;
+	}
+}

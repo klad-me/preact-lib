@@ -1,0 +1,20 @@
+.grid, .grid > nav {
+	display: grid;
+	grid-auto-rows: min-content;
+	grid-auto-flow: dense;
+	grid-template-columns: 1fr 1fr;
+	align-items: start;
+	gap: 1rem;
+	max-width: 80rem;
+}
+
+
+@media (orientation: portrait), (max-width: 790px) {
+	.grid {
+		grid-template-columns: 1fr !important;
+	
+		& > div.pad {
+			display: none !important;
+		}
+	}
+}

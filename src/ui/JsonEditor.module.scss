@@ -1,0 +1,36 @@
+.container {
+	--column-gap: 2rem;
+
+	table {
+		thead {
+			tr {
+				th {
+					text-align: left;
+				}
+			}
+		}
+
+		tbody {
+			tr {
+				vertical-align: top;
+
+				&.clickable {
+					cursor: pointer;
+				}
+
+				td:first-child {
+					padding-right: var(--column-gap);
+					min-width: 10rem;
+				}
+
+				td:nth-child(2) {
+					min-width: 10rem;
+				}
+			}
+
+			tr:hover {
+				background-color: var(--clr-hover);
+			}
+		}
+	}
+}

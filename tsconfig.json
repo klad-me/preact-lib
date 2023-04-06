@@ -1,0 +1,23 @@
+{
+	"compilerOptions": {
+		"baseUrl": "src",
+		"rootDir": "src",
+		"paths": {
+			"*": [
+				"*",
+				"ui/*"
+			]
+		},
+		"jsx": "react-jsx",
+		"jsxImportSource": "preact",
+		"skipLibCheck": true,
+		"plugins": [
+			{
+				"name": "typescript-plugin-css-modules",
+				"options": {
+					"classnameTransform": "camelCaseOnly"
+				}
+			}
+		]
+	},
+}

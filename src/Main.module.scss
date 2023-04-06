@@ -1,0 +1,53 @@
+.main-container {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+
+	.button {
+		font-weight: bold;
+
+		&::after {
+			content: " :)";
+		}
+	}
+
+	.button1 {
+		background-color: red;
+	}
+
+	.button2 {
+		background-color: yellow;
+	}
+
+	.result {
+		font-weight: bold;
+		text-decoration: underline;
+
+		&.style1 {
+			background-color: red;
+		}
+
+		&.style2 {
+			color: yellow;
+		}
+	}
+}
+
+
+.screen-header {
+	background-color: blue;
+	font-size: 1.2rem;
+	color: yellow;
+	font-weight: bold;
+	padding: 0.5rem;
+}
+
+
+.screen-footer {
+	background-color: grey;
+	font-size: 1.2rem;
+	color: black;
+	font-weight: bold;
+	padding: 0.5rem;
+}

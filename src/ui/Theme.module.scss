@@ -1,0 +1,45 @@
+/* Light theme */
+body {
+	--clr-background: white;
+	--clr-hover: #eee;
+	--clr-text: black;
+	--clr-shadow-rgb: 0, 0, 0;
+
+	--clr-header-text: #22f;
+
+	--clr-panel-header: #22f;
+	--clr-panel-header-text: black;
+	--clr-panel-container: #fcfcfc;
+
+	--clr-progress-bar-background: #ddd;
+	--clr-progress-bar-color: #88d;
+
+	--clr-button-gradient-from: white;
+	--clr-button-gradient-to: #ccc;
+
+	--clr-tabs-background: #ddd;
+	--clr-tabs-inactive: #ccc;
+}
+
+/* Dark theme */
+body.darkTheme {
+	--clr-background: black;
+	--clr-hover: #333;
+	--clr-text: white;
+	--clr-shadow-rgb: 255, 255, 255;
+
+	--clr-header-text: #66f;
+
+	--clr-panel-header: #88f;
+	--clr-panel-header-text: black;
+	--clr-panel-container: #111;
+
+	--clr-progress-bar-background: #114;
+	--clr-progress-bar-color: #44c;
+
+	--clr-button-gradient-from: #444;
+	--clr-button-gradient-to: #111;
+
+	--clr-tabs-background: #222;
+	--clr-tabs-inactive: #444;
+}
