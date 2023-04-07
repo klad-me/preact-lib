@@ -4,6 +4,8 @@
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+	
+	--appMain-margin: 1rem;
 }
 
 html, body {
@@ -15,7 +17,7 @@ html, body {
 
 
 #appMain {
-	margin: 1rem;
+	margin: var(--appMain-margin);
 	display: block;
 }
 
