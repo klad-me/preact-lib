@@ -1,8 +1,9 @@
 
-export function makeArray<T>(size: number, cb: (index: number) => T): T[]
+export function makeArray<T>(size: number, cb: (index: number) => T, from?: number): T[]
 {
 	let A: T[]=[];
-	for (let i=0; i<size; i++)
+	if (from === undefined) from=0;
+	for (let i=from; i<size; i++)
 		A[i]=cb(i)
 	return A;
 }
