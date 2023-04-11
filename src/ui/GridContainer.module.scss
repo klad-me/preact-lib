@@ -8,6 +8,10 @@
 	max-width: 80rem;
 }
 
+.grid > nav {
+	margin-top: 0;
+}
+
 
 @media (orientation: portrait), (max-width: 790px) {
 	.grid {
