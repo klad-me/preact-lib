@@ -29,7 +29,7 @@ export function SelectField(props: SelectFieldProps)
 		}
 	}, [editable, props.value]);
 
-	props.clickEvent?.use(openEditor);
+	props.clickEvent?.use(openEditor, [openEditor]);
 
 	const editorOK = useCallback( () => {
 		setEditorOpen(false);

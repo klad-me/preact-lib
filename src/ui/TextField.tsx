@@ -37,7 +37,7 @@ export function TextField(props: TextFieldProps)
 		}
 	}, [editable, props.value]);
 
-	props.clickEvent?.use(openEditor);
+	props.clickEvent?.use(openEditor, [ openEditor ]);
 
 	const valid = editorOpen ?
 		validator(editorText) :

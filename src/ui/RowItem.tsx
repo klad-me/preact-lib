@@ -2,7 +2,6 @@ import S from './RowItem.module.scss';
 import { useEvent, Event } from '../hooks';
 import { ComponentChildren, toChildArray, VNode } from 'preact';
 import clsx from 'clsx';
-import { prependOnceListener } from 'process';
 
 
 interface RowItemProps
