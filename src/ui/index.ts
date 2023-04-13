@@ -23,3 +23,4 @@ export * from './UnixTimeField';
 export * from './HHMMField';
 export * from './JsonEditor';
 export * from './Screen';
+export * from './ErrorBoundary';
