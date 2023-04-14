@@ -48,7 +48,7 @@ export function TextField(props: TextFieldProps)
 		if (valid)
 			props.onInput(editorText); else
 			popup('Ошибка', 'Введено некорректное значение.');
-	}, [editorText, valid])
+	}, [editorText, valid, props.onInput])
 
 	const onInputChanged = useCallback( (e) => {
 		setEditorText((e.target as HTMLInputElement).value);

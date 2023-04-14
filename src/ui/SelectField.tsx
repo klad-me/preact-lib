@@ -36,7 +36,7 @@ export function SelectField(props: SelectFieldProps)
 		let value = inputRef.current.value;
 		if ('string' == typeof props.items[value])
 			props.onInput(parseInt(value));
-	}, [])
+	}, [props.onInput, props.items])
 
 	const onInputKey = useCallback( (e: KeyboardEvent) => {
 		switch (e.key)
