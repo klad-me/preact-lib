@@ -5,6 +5,7 @@ import { useState } from 'preact/hooks';
 import { useScreenBlank } from './ScreenBlank';
 import { Event } from '../hooks';
 import clsx from 'clsx';
+import { InlineSpinner } from './InlineSpinner';
 
 
 export type CustomPopupProps = {
@@ -74,6 +75,32 @@ export function customPopup(content: PopupContent)
 	content.props.onClose=closePopup;
 	popupStack.push(content);
 	ev.emit({});
+}
+
+
+export function waitPromise<T=void>(promise: Promise<T>, onDone?: (result: T) => void, onError?: (error: Error) => void, loadingText?: string)
+{
+	popupStack.push(
+		<div>
+			<div class={S.waitPromise}>
+				<InlineSpinner />
+				<span class={S.waitPromiseText}>
+					{loadingText ?? "Выполнение..."}
+				</span>
+			</div>
+		</div>
+	);
+	ev.emit({});
+
+	promise
+		.then( (result: T) => {
+			closePopup();
+			if ('function' == typeof onDone) onDone(result);
+		})
+		.catch( (e: Error) => {
+			closePopup();
+			if ('function' == typeof onError) onError(e);
+		});
 }
 
 

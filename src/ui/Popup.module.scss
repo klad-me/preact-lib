@@ -32,3 +32,17 @@
 		width: 80vw !important;
 	}
 }
+
+.wait-promise {
+	padding: 3rem 1.5rem;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	cursor: wait;
+}
+
+.wait-promise-text {
+	margin-left: 1rem;
+}

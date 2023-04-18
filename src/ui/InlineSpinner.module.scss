@@ -1,0 +1,29 @@
+.spinner {
+	--spinner-size: 1.5rem;
+	--border-size: 4px;
+	
+	display: inline-block;
+	width: var(--spinner-size);
+	height: var(--spinner-size);
+}
+
+.spinner:after {
+	content: " ";
+	display: block;
+	width: calc(var(--spinner-size) - var(--border-size) * 2);
+	height: calc(var(--spinner-size) - var(--border-size) * 2);
+	margin: 0;
+	border-radius: 50%;
+	border: var(--border-size) solid var(--clr-text);
+	border-color: var(--clr-text) transparent var(--clr-text) transparent;
+	animation: spinner 1.5s linear infinite;
+}
+
+@keyframes spinner {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}

@@ -1,0 +1,26 @@
+.loading {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	margin: 0.5rem 0;
+	cursor: wait;
+}
+
+.loading-text {
+	font-weight: bold;
+	font-size: 1.2rem;
+	margin-left: 1rem;
+}
+
+.failed {
+	display: block;
+}
+
+.failed-text {
+	font-weight: bold;
+	font-size: 1.2rem;
+	margin-bottom: 0.5rem;
+}
