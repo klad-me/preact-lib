@@ -28,5 +28,5 @@ export function HHMMField(props: HHMMFieldProps)
 		props.onInput(hh*60+mm);
 	}, [props.onInput]);
 
-	return <TextField value={value} onInput={('function' == typeof props.onInput) && onInput} validator={hhmmValidator} inputMode="decimal" style={props.style} clickEvent={props.clickEvent} />;
+	return <TextField value={value} onInput={('function' == typeof props.onInput) ? onInput : undefined} validator={hhmmValidator} inputMode="decimal" style={props.style} clickEvent={props.clickEvent} />;
 }

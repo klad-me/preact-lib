@@ -40,17 +40,17 @@ export function TextField(props: TextFieldProps)
 	props.clickEvent?.use(openEditor, [ openEditor ]);
 
 	const valid = editorOpen ?
-		validator(editorText) :
+		validator(editorText ?? '') :
 		(props.value !== undefined) && validator(props.value);
 	
 	const editorOK = useCallback( () => {
 		setEditorOpen(false);
 		if (valid)
-			props.onInput(editorText); else
+			('function' == typeof props.onInput) && props.onInput(editorText ?? ''); else
 			popup('Ошибка', 'Введено некорректное значение.');
 	}, [editorText, valid, props.onInput])
 
-	const onInputChanged = useCallback( (e) => {
+	const onInputChanged = useCallback( (e: any) => {
 		setEditorText((e.target as HTMLInputElement).value);
 	}, [])
 
@@ -69,7 +69,7 @@ export function TextField(props: TextFieldProps)
 
 	const [ setBlurTimer, resetBlurTimer ] = useTimeout(() => setEditorOpen(false), [], 1000);
 
-	const inputRef = useRef<HTMLInputElement>();
+	const inputRef = useRef<HTMLInputElement>(null);
 
 	useEffect( () => {
 		if (inputRef.current)

@@ -1,6 +1,5 @@
-import clsx from 'clsx';
 import S from './Tabs.module.scss';
-
+import clsx from 'clsx';
 import { ComponentChildren, toChildArray, VNode } from 'preact';
 import { useState, useMemo } from 'preact/hooks';
 
@@ -56,12 +55,12 @@ export function TabContainer(props: TabContainerProps)
 	if (tabN < 0) tabN=0;
 	if (tabN >= tabs.length) tabN=tabs.length-1;
 
-	const buttons = <TabButtons names={names} current={current} onChange={setCurrent} position={props.buttons} />;
+	const buttons = <TabButtons names={names} current={current} onChange={setCurrent} position={props.buttons ?? 'top'} />;
 
 	return (
 		<div class={S.tabs}>
 			{(props.buttons != 'bottom') && buttons}
-			<div>{tabs.map( (tab, idx) => <div class={(idx != current) && 'hide'}>{tab}</div> )}</div>
+			<div>{tabs.map( (tab, idx) => <div class={clsx((idx != current) && 'hide')}>{tab}</div> )}</div>
 			{(props.buttons == 'bottom') && buttons}
 		</div>
 	)

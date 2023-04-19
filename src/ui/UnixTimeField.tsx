@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from "preact/hooks";
 import { DateTimeField } from "./DateTimeField";
-import { Event } from "hooks";
+import { Event } from "../hooks";
 
 
 type UnixTimeFieldProps = {
@@ -20,5 +20,5 @@ export function UnixTimeField(props: UnixTimeFieldProps)
 		props.onInput(Math.floor(value.getTime() / 1000) - tzOffset);
 	}, [props.onInput, tzOffset]);
 
-	return <DateTimeField value={value} onInput={('function' == typeof props.onInput) && onInput} seconds={props.seconds} clickEvent={props.clickEvent} />
+	return <DateTimeField value={value} onInput={('function' == typeof props.onInput) ? onInput : undefined} seconds={props.seconds} clickEvent={props.clickEvent} />
 }

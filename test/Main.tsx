@@ -1,5 +1,5 @@
 import S from './Main.module.scss';
-import { CX, CustomPopupProps, TextField } from '@preact-lib/ui';
+import { CustomPopupProps, TextField } from '@preact-lib/ui';
 import { useState, useCallback, useEffect } from 'preact/hooks';
 import { Panel, ProgressBar, getUiTheme, setUiTheme, GridContainer, GridPadding, LocalFileReader, RowItem } from '@preact-lib/ui';
 import { ScreenBlankElement, PopupElement, popup, ask, customPopup, SpinnerElement, useSpinner, NumberField, IPField } from '@preact-lib/ui';
@@ -7,6 +7,7 @@ import { SelectField, BitsField, TabContainer, Tab, DateField, TimeField, DateTi
 import { Screen } from '@preact-lib/ui';
 import { useTimeout, useOrientation } from '@preact-lib/hooks';
 import { JsonObjectSchema } from '@preact-lib/types';
+import clsx from 'clsx';
 
 
 function MyCustomPopup({onClose}: CustomPopupProps)
@@ -190,7 +191,7 @@ function ScreenMain()
 		popup("Theme", "Theme changed !")
 	}, [])
 
-	const onFileLoad = useCallback( (data: ArrayBuffer, name: string) => {
+	const onFileLoad = useCallback( (data: ArrayBuffer, name?: string) => {
 		console.log("Load ok", name, data)
 	}, []);
 
@@ -225,10 +226,10 @@ function ScreenMain()
 				<Panel title="Panel 1" toggleable open={false}>
 					<button onClick={changeTheme}>Сменить тему</button>
 					<header>Hello world</header>
-					<button onClick={() => setButtonState1(v => !v)} class={CX(S.button, S.button1)}>Click me !</button>
-					<button onClick={() => setButtonState2(v => !v)} class={CX(S.button, S.button2)}>And me !</button>
-					<p class={CX(S.result, buttonState1 && S.style1, buttonState2 && S.style2)}>Result 1</p>
-					<p class={CX(S.result, { [S.style1]: buttonState2, [S.style2]: buttonState1})}>Result 2</p>
+					<button onClick={() => setButtonState1(v => !v)} class={clsx(S.button, S.button1)}>Click me !</button>
+					<button onClick={() => setButtonState2(v => !v)} class={clsx(S.button, S.button2)}>And me !</button>
+					<p class={clsx(S.result, buttonState1 && S.style1, buttonState2 && S.style2)}>Result 1</p>
+					<p class={clsx(S.result, { [S.style1]: buttonState2, [S.style2]: buttonState1})}>Result 2</p>
 
 					<Panel title="Заголовок">
 						Hello world

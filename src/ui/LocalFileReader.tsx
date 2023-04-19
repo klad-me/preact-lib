@@ -9,10 +9,12 @@ export type LocalFileReaderProps = {
 
 export function LocalFileReader({ accept, onLoad, onError }: LocalFileReaderProps )
 {
-	const fileRef = useRef<HTMLInputElement>();
+	const fileRef = useRef<HTMLInputElement>(null);
 	const [ inputEnabled, setInputEnabled ] = useState(true);
 	
 	const fileSelected = useCallback( () => {
+		if ( (! fileRef.current) || (! fileRef.current.files) || (fileRef.current.files.length == 0) ) return;
+
 		// Прячем выбор файла
 		setInputEnabled(false);
 		

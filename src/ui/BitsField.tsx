@@ -27,13 +27,13 @@ export function BitsField(props: BitsFieldProps)
 	const disabledMask = props.disabledMask || 0;
 	const value = Number(props.value) & ~disabledMask;
 
-	props.clickEvent.use( () => {
+	props.clickEvent?.use( () => {
 		setOpen( (prev: boolean) => ! prev );
 	}, [])
 
 	function onInput(bit: number)
 	{
-		if ( ('number' == typeof props.value) && (editable) )
+		if ( ('number' == typeof props.value) && (editable) && ('function' == typeof props.onInput) )
 			props.onInput(value ^ BV(bit));
 	}
 
@@ -49,15 +49,15 @@ export function BitsField(props: BitsFieldProps)
 		return (
 			<div class={S[props.layout ?? 'vertical']}>
 				{
-					Object.keys(props.items).map( (key) => (
-						<label class={clsx(editable && S.editable, (disabledMask & BV(Number(key))) && S.disabled )} key={key}>
+					Object.keys(props.items).map(Number).map( (key) => (
+						<label class={clsx(editable && S.editable, (disabledMask & BV(key)) && S.disabled )} key={key}>
 							<input
 								type="checkbox"
 								key={key}
 								class={clsx(editable && S.editable)}
-								checked={(value & BV(Number(key))) != 0}
-								onInput={ () => onInput(Number(key)) }
-								disabled={ (! editable) || ('number' != typeof props.value) || ((disabledMask & BV(Number(key))) != 0)}
+								checked={(value & BV(key)) != 0}
+								onInput={ () => onInput(key) }
+								disabled={ (! editable) || ('number' != typeof props.value) || ((disabledMask & BV(key)) != 0)}
 								/>
 							{props.items[key]}
 						</label>

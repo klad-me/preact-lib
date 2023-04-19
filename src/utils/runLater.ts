@@ -5,7 +5,7 @@ type RunLaterCallback = () => void;
 
 type RunLaterElement = {
 	cb: RunLaterCallback;
-	callStack: string;
+	callStack?: string;
 };
 
 
@@ -16,17 +16,16 @@ const list: RunLaterElement[] = [];
 function run(): void
 {
 	timer=undefined;
-	while (list.length > 0)
+	let item: RunLaterElement | undefined;
+	while ( (item = list.shift()) !== undefined ) // (list.length > 0)
 	{
-		const { cb, callStack } = list.shift();
-
 		try
 		{
-			cb();
-		} catch (e)
+			item.cb();
+		} catch (e: any)
 		{
 			console.error(e.toString());
-			if (callStack) console.error("Call stack:", callStack);
+			if (item.callStack) console.error("Call stack:", item.callStack);
 		}
 	}
 }

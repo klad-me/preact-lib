@@ -24,7 +24,7 @@ export function NumberField(props: NumberFieldProps)
 {
 	const dp=props.dp || 0;
 	let value = ('number' == typeof props.value) ? Number(props.value).toFixed(dp) : undefined;
-	let onInput: TextFieldOnInput;
+	let onInput: TextFieldOnInput | undefined;
 	if (props.onInput)
 	{
 		const cb=props.onInput;

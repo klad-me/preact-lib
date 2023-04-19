@@ -1,8 +1,5 @@
 import './UI.scss';
 
-import clsx from 'clsx';
-export const CX=clsx;
-
 export * from './Theme';
 export * from './Panel';
 export * from './ProgressBar';

@@ -10,12 +10,14 @@ export function useTimeout(cb: () => void, inputs?: Inputs, defaultTimeout?: num
 {
 	const timer = useRef<any>();
 
+	if (! inputs) inputs=[];
+
 	const reset = useCallback( () => {
 		if (timer.current !== undefined)
 			clearTimeout(timer.current);
 	}, inputs);
 
-	const set = useCallback( (ms?: number) => {
+	const set = useCallback( (ms?: number | unknown) => {
 		reset();
 		timer.current = setTimeout(cb, ('number' == typeof ms) ? ms : defaultTimeout);
 	}, inputs);

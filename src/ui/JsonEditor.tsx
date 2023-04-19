@@ -34,7 +34,7 @@ function ifExpr(schema: JsonValueSchema, value: { [key: string]: any }, updateFn
 {
 	if (schema.if === undefined) return true;
 	const context=useContext(JsonEditorContext);
-	context.ev.use( () => updateFn({}), [] );
+	context.ev?.use( () => updateFn({}), [] );
 	try
 	{
 		return EvalExpr(schema.if, { '$': context.root, ...value });
@@ -101,7 +101,7 @@ function EditValue(props: EditValueProps)
 				props.value[props.name]=value;
 				break;
 		}
-		context.onChange(context.root);
+		('function' == typeof context.onChange) && context.onChange(context.root);
 		update({});
 	}
 	
@@ -125,6 +125,10 @@ function EditValue(props: EditValueProps)
 		
 		case 'bits':
 			editor=<BitsField value={Number(value)} onInput={onInput} items={props.schema.items} />
+			break;
+		
+		default:
+			editor=<div/>;
 			break;
 	}
 

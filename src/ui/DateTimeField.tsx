@@ -37,7 +37,7 @@ function dateTimeValidator(s: string): boolean
 type DateTimeFieldProps = {
 	value: Date;
 	seconds?: boolean;
-	onInput: (value: Date) => void;
+	onInput?: (value: Date) => void;
 	clickEvent?: Event<unknown>;
 };
 
@@ -53,10 +53,10 @@ export function DateField(props: DateTimeFieldProps)
 		d.setFullYear(year);
 		d.setMonth(month-1);
 		d.setDate(date);
-		props.onInput(d);
+		('function' == typeof props.onInput) && props.onInput(d);
 	}, [props.value, props.onInput]);
 
-	return <TextField value={value} onInput={('function' == typeof props.onInput) && onInput} validator={dateValidator} clickEvent={props.clickEvent} inputMode="decimal" />;
+	return <TextField value={value} onInput={('function' == typeof props.onInput) ? onInput : undefined} validator={dateValidator} clickEvent={props.clickEvent} inputMode="decimal" />;
 }
 
 
@@ -73,10 +73,10 @@ export function TimeField(props: DateTimeFieldProps)
 		d.setMinutes(min);
 		d.setSeconds(~~sec);
 		d.setMilliseconds(0);
-		props.onInput(d);
+		('function' == typeof props.onInput) && props.onInput(d);
 	}, [props.value, props.onInput]);
 
-	return <TextField value={value} onInput={('function' == typeof props.onInput) && onInput} validator={timeValidator} clickEvent={props.clickEvent} inputMode="decimal" />;
+	return <TextField value={value} onInput={('function' == typeof props.onInput) ? onInput : undefined} validator={timeValidator} clickEvent={props.clickEvent} inputMode="decimal" />;
 }
 
 
@@ -100,8 +100,8 @@ export function DateTimeField(props: DateTimeFieldProps)
 		d.setMinutes(min);
 		d.setSeconds(~~sec);
 		d.setMilliseconds(0);
-		props.onInput(d);
+		('function' == typeof props.onInput) && props.onInput(d);
 	}, [props.value, props.onInput]);
 	
-	return <TextField value={value} onInput={('function' == typeof props.onInput) && onInput} validator={dateTimeValidator} clickEvent={props.clickEvent} inputMode="decimal" />;
+	return <TextField value={value} onInput={('function' == typeof props.onInput) ? onInput : undefined} validator={dateTimeValidator} clickEvent={props.clickEvent} inputMode="decimal" />;
 }

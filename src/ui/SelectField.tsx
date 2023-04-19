@@ -33,9 +33,12 @@ export function SelectField(props: SelectFieldProps)
 
 	const editorOK = useCallback( () => {
 		setEditorOpen(false);
-		let value = inputRef.current.value;
-		if ('string' == typeof props.items[value])
-			props.onInput(parseInt(value));
+		if ( (inputRef.current) && ('function' == typeof props.onInput) )
+		{
+			let value = Number(inputRef.current.value);
+			if ('string' == typeof props.items[value])
+				props.onInput(value);
+		}
 	}, [props.onInput, props.items])
 
 	const onInputKey = useCallback( (e: KeyboardEvent) => {
@@ -53,7 +56,7 @@ export function SelectField(props: SelectFieldProps)
 
 	const [ setBlurTimer, resetBlurTimer ] = useTimeout(() => setEditorOpen(false), [], 1000);
 
-	const inputRef = useRef<HTMLSelectElement>();
+	const inputRef = useRef<HTMLSelectElement>(null);
 
 	useEffect( () => {
 		if (inputRef.current)
@@ -72,7 +75,7 @@ export function SelectField(props: SelectFieldProps)
 	} else
 	{
 		// Редактор открыт
-		let select=Object.keys(props.items).map( (key) => <option value={key}>{props.items[key]}</option> );
+		let select=Object.keys(props.items).map( (key) => <option value={key}>{props.items[Number(key)]}</option> );
 		
 		return (
 			<div class={S.editor} key="editor">

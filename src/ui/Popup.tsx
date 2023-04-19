@@ -1,10 +1,9 @@
 import S from './Popup.module.scss';
-
+import clsx from 'clsx';
 import { ComponentChild, VNode } from 'preact';
 import { useState } from 'preact/hooks';
 import { useScreenBlank } from './ScreenBlank';
 import { Event } from '../hooks';
-import clsx from 'clsx';
 import { InlineSpinner } from './InlineSpinner';
 
 
@@ -35,7 +34,7 @@ export function PopupElement()
 
 	return (
 		<div class={clsx(S.popup, (popupStack.length == 0) && 'hide')}>
-			{popupStack.map( (el, idx, arr) => <div class={(idx != arr.length-1) && 'hide'}>{el}</div> )}
+			{popupStack.map( (el, idx, arr) => <div class={clsx((idx != arr.length-1) && 'hide')}>{el}</div> )}
 		</div>
 	);
 }
