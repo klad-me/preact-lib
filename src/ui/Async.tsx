@@ -35,12 +35,7 @@ export function Async(props: AsyncProps): VNode
 	switch (state)
 	{
 		case 'loading':
-			return (
-				<div class={S.loading}>
-					<InlineSpinner />
-					<div class={S.loadingText}>{props.loadingText ?? 'Загрузка...'}</div>
-				</div>
-			);
+			return <InlineSpinner text={props.loadingText ?? 'Загрузка...'} center />
 		
 		case 'done':
 			return content || <div/>;
