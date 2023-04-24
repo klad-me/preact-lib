@@ -1,4 +1,4 @@
-import { Component, ComponentChild, ComponentChildren, RenderableProps } from "preact";
+import { Component, ComponentChildren } from "preact";
 
 
 type ErrorBoundaryProps = {

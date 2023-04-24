@@ -4,6 +4,7 @@ import { useRef, useState, useCallback, useEffect } from 'preact/hooks';
 import { popup } from './Popup';
 import { Event, useTimeout } from '../hooks';
 import clsx from 'clsx';
+import { useTr } from '../tr';
 
 
 export type TextFieldValidator = (value: string) => boolean;
@@ -23,6 +24,7 @@ export type TextFieldProps =
 
 export function TextField(props: TextFieldProps)
 {
+	const tr = useTr();
 	const validator = props.validator || ((value) => true);
 	const editable = ('function' == typeof props.onInput);
 
@@ -47,7 +49,7 @@ export function TextField(props: TextFieldProps)
 		setEditorOpen(false);
 		if (valid)
 			('function' == typeof props.onInput) && props.onInput(editorText ?? ''); else
-			popup('Ошибка', 'Введено некорректное значение.');
+			popup(tr, tr("@preact-lib.error", "Ошибка"), tr("@preact-lib.incorrectValue", "Введено некорректное значение."));
 	}, [editorText, valid, props.onInput])
 
 	const onInputChanged = useCallback( (e: any) => {

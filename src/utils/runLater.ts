@@ -17,7 +17,7 @@ function run(): void
 {
 	timer=undefined;
 	let item: RunLaterElement | undefined;
-	while ( (item = list.shift()) !== undefined ) // (list.length > 0)
+	while ( (item = list.shift()) !== undefined )
 	{
 		try
 		{

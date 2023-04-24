@@ -2,6 +2,7 @@ import S from './SelectField.module.scss';
 import { useRef, useState, useCallback, useEffect } from 'preact/hooks';
 import { Event, useTimeout } from '../hooks';
 import clsx from 'clsx';
+import { useTr } from '../tr';
 
 
 export type SelectFieldOnInput = (value: number) => void;
@@ -19,6 +20,7 @@ export type SelectFieldProps =
 export function SelectField(props: SelectFieldProps)
 {
 	const editable = ('function' == typeof props.onInput);
+	const tr = useTr();
 
 	const [ editorOpen, setEditorOpen ] = useState(false);
 
@@ -90,7 +92,7 @@ export function SelectField(props: SelectFieldProps)
 					>
 					${select}
 				</select>
-				<button class={S.buttonOk} onClick={editorOK}>OK</button>
+				<button class={S.buttonOk} onClick={editorOK}>{tr("@preact-lib.ok", "OK")}</button>
 			</div>
 		);
 	}

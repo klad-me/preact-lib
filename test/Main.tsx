@@ -8,6 +8,7 @@ import { Screen } from '@preact-lib/ui';
 import { useTimeout, useOrientation } from '@preact-lib/hooks';
 import { JsonObjectSchema } from '@preact-lib/types';
 import clsx from 'clsx';
+import { useTr } from '@preact-lib/tr';
 
 
 function MyCustomPopup({onClose}: CustomPopupProps)
@@ -183,12 +184,13 @@ function JsonEditorTest()
 
 function ScreenMain()
 {
+	const tr = useTr();
 	const [ buttonState1, setButtonState1 ] = useState(false);
 	const [ buttonState2, setButtonState2 ] = useState(false);
 
 	const changeTheme = useCallback( () => {
 		setUiTheme( (getUiTheme() == 'dark') ? 'light' : 'dark' );
-		popup("Theme", "Theme changed !")
+		popup(tr, "Theme", "Theme changed !")
 	}, [])
 
 	const onFileLoad = useCallback( (data: ArrayBuffer, name?: string) => {
@@ -196,10 +198,10 @@ function ScreenMain()
 	}, []);
 
 	const popupTest = useCallback( () => {
-		popup("Popup 1", "Content 1", () => console.log("Popup1 closed"));
-		popup("Popup 2", "Content 2", () => console.log("Popup2 closed"));
+		popup(tr, "Popup 1", "Content 1", () => console.log("Popup1 closed"));
+		popup(tr, "Popup 2", "Content 2", () => console.log("Popup2 closed"));
 		customPopup(<MyCustomPopup />);
-		ask("Ask", "Ask test", () => console.log("OK"), () => console.log("Cancel"))
+		ask(tr, "Ask", "Ask test", () => console.log("OK"), () => console.log("Cancel"))
 	}, []);
 
 	const [ spinnerVisible, setSpinnerVisible ] = useState(false);

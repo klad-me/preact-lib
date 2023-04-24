@@ -1,0 +1,14 @@
+{
+	"@preact-lib": {
+		"loading": "Loading...",
+		"loadFailed": "Loading failed !",
+		"Nselected": "%1 selected",
+		"param": "Parameter",
+		"value": "Value",
+		"ok": "OK",
+		"cancel": "Cancel",
+		"executing": "Executing...",
+		"error": "Error",
+		"incorrectValue": "Incorrect value entered."
+	}
+}

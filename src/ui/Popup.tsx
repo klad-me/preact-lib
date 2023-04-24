@@ -5,6 +5,7 @@ import { useState } from 'preact/hooks';
 import { useScreenBlank } from './ScreenBlank';
 import { Event } from '../hooks';
 import { InlineSpinner } from './InlineSpinner';
+import { trContextType } from '../tr';
 
 
 export type CustomPopupProps = {
@@ -40,28 +41,28 @@ export function PopupElement()
 }
 
 
-export function popup(header: string, content: string | ComponentChild, onOk?: () => void)
+export function popup(tr: trContextType, header: string, content: string | ComponentChild, onOK?: () => void)
 {
 	popupStack.push(
 		<div>
 			<header>{header}</header>
 			<p>{content}</p>
-			<nav><button class={S.buttonOk} onClick={closePopup.bind(null, onOk)}>OK</button></nav>
+			<nav><button class={S.buttonOk} onClick={closePopup.bind(null, onOK)}>{tr("@preact-lib.ok", "OK")}</button></nav>
 		</div>
 	);
 	ev.emit({});
 }
 
 
-export function ask(header: string, content: string | ComponentChild, onOk?: () => void, onCancel?: () => void)
+export function ask(tr: trContextType, header: string, content: string | ComponentChild, onOk?: () => void, onCancel?: () => void)
 {
 	popupStack.push(
 		<div>
 			<header>{header}</header>
 			<p>{content}</p>
 			<nav>
-				<button class={S.buttonOk} onClick={closePopup.bind(null, onOk)}>OK</button>
-				<button class={S.buttonCancel} onClick={closePopup.bind(null, onCancel)}>Отмена</button>
+				<button class={S.buttonOk} onClick={closePopup.bind(null, onOk)}>{tr("@preact-lib.ok", "OK")}</button>
+				<button class={S.buttonCancel} onClick={closePopup.bind(null, onCancel)}>{tr("@preact-lib.cancel", "Отмена")}</button>
 			</nav>
 		</div>
 	);
@@ -77,14 +78,14 @@ export function customPopup(content: PopupContent)
 }
 
 
-export function waitPromise<T=void>(promise: Promise<T>, onDone?: (result: T) => void, onError?: (error: Error) => void, loadingText?: string)
+export function waitPromise<T=void>(tr: trContextType, promise: Promise<T>, onDone?: (result: T) => void, onError?: (error: Error) => void, loadingText?: string)
 {
 	popupStack.push(
 		<div>
 			<div class={S.waitPromise}>
 				<InlineSpinner />
 				<span class={S.waitPromiseText}>
-					{loadingText ?? "Выполнение..."}
+					{loadingText ?? tr("@preact-lib.executing", "Выполнение...")}
 				</span>
 			</div>
 		</div>

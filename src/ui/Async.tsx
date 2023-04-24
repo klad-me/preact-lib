@@ -2,6 +2,7 @@ import S from './Async.module.scss';
 import { VNode } from "preact";
 import { useEffect, useState } from "preact/hooks";
 import { InlineSpinner } from './InlineSpinner';
+import { useTr } from '../tr';
 
 
 type AsyncState = 'loading' | 'done' | 'failed';
@@ -18,6 +19,7 @@ export function Async(props: AsyncProps): VNode
 {
 	const [ state, setState ] = useState<AsyncState>('loading');
 	const [ content, setContent ] = useState<VNode | undefined>();
+	const tr = useTr();
 
 	useEffect( () => {
 		props.loader()
@@ -35,7 +37,7 @@ export function Async(props: AsyncProps): VNode
 	switch (state)
 	{
 		case 'loading':
-			return <InlineSpinner text={props.loadingText ?? 'Загрузка...'} center />
+			return <InlineSpinner text={props.loadingText ?? tr("@preact-lib.loading", "Загрузка...")} center />
 		
 		case 'done':
 			return content || <div/>;
@@ -44,7 +46,7 @@ export function Async(props: AsyncProps): VNode
 		default:
 			return (
 				<div class={S.failed}>
-					<div class={S.failedText}>{props.errorText ?? 'Ошибка загрузки'}</div>
+					<div class={S.failedText}>{props.errorText ?? tr("@preact-lib.loadFailed", "Ошибка загрузки !")}</div>
 					{content}
 				</div>
 			);

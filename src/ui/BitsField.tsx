@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import { BV } from '../utils';
 import { Event } from '../hooks';
 import { useState } from 'preact/hooks';
+import { useTr } from '../tr';
 
 
 export type BitsFieldOnInput = (value: number) => void;
@@ -26,6 +27,7 @@ export function BitsField(props: BitsFieldProps)
 	const keys = Object.keys(props.items);
 	const disabledMask = props.disabledMask || 0;
 	const value = Number(props.value) & ~disabledMask;
+	const tr = useTr();
 
 	props.clickEvent?.use( () => {
 		setOpen( (prev: boolean) => ! prev );
@@ -43,7 +45,7 @@ export function BitsField(props: BitsFieldProps)
 		Object.keys(props.items).map(Number).map( (key) => {
 			if (value & BV(key)) count++;
 		});
-		return <div onClick={() => setOpen(true)}>{count} выбрано</div>;
+		return <div onClick={() => setOpen(true)}>{tr("@preact-lib.Nselected", "%1 выбрано", count)}</div>;
 	} else
 	{
 		return (

@@ -1,7 +1,7 @@
 import S from './JsonEditor.module.scss';
 
 import { JsonObjectSchema, JsonArraySchema, JsonValueSchema } from '../types';
-import { useCallback, useContext, useEffect, useState } from 'preact/hooks';
+import { useCallback, useContext, useState } from 'preact/hooks';
 import { ComponentChildren, createContext, VNode } from 'preact';
 import { useEvent, Event } from '../hooks';
 import { TextField } from './TextField';
@@ -9,6 +9,7 @@ import { NumberField } from './NumberField';
 import { SelectField } from './SelectField';
 import { BitsField } from './BitsField';
 import { EvalExpr } from '../utils';
+import { useTr } from '@preact-lib/tr';
 
 
 const rightArrow='\u25B7', downArrow='\u25BD';
@@ -249,6 +250,7 @@ type JsonEditorProps = {
 
 export function JsonEditor(props: JsonEditorProps)
 {
+	const tr = useTr();
 	const ev=useEvent<any>();
 
 	const onChange = useCallback( () => {
@@ -263,8 +265,8 @@ export function JsonEditor(props: JsonEditorProps)
 				<table>
 					<thead>
 						<tr>
-							<th>Параметр</th>
-							<th>Значение</th>
+							<th>{tr("@preact-lib.param", "Параметр")}</th>
+							<th>{tr("@preact-lib.value", "Значение")}</th>
 						</tr>
 					</thead>
 					<tbody>

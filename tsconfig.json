@@ -18,6 +18,10 @@
 					"classnameTransform": "camelCaseOnly"
 				}
 			}
-		]
-	},
+		],
+		"downlevelIteration": true,
+		"importHelpers": true,
+		"resolveJsonModule": true,
+		"esModuleInterop": true
+	}
 }
