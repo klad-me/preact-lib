@@ -1,3 +1,4 @@
+import { useMemo } from 'preact/hooks';
 import S from './ProgressBar.module.scss';
 
 
@@ -8,14 +9,17 @@ type ProgressBarProps = {
 
 export function ProgressBar({percent}: ProgressBarProps)
 {
+	percent=Math.round(percent);
 	if (percent < 0) percent=0; else
 	if (percent > 100) percent=100;
 	
-	let percentString=percent + '%';
+	return useMemo( () => {
+		let percentString=percent + '%';
 	
-	return (
-		<div class={S.progressBar}>
-			<div style={{ width: percentString }}>{percentString}</div>
-		</div>
-	);
+		return (
+			<div class={S.progressBar}>
+				<div style={{ width: percentString }}>{percentString}</div>
+			</div>
+		);	
+	}, [ percent ] );
 }
