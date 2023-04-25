@@ -3,8 +3,8 @@ import { useState, useRef, useCallback } from "preact/hooks";
 
 export type LocalFileReaderProps = {
 	accept?: string;
-	onLoad: (data: ArrayBuffer, name?: string) => void;
-	onError?: ((name?: string, error?: ProgressEvent<FileReader>) => void) | string;
+	onLoad: (data: ArrayBuffer, name: string) => void;
+	onError?: ((name: string, error: ProgressEvent<FileReader>) => void) | string;
 };
 
 export function LocalFileReader({ accept, onLoad, onError }: LocalFileReaderProps )
