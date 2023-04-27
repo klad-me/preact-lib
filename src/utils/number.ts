@@ -23,7 +23,7 @@ export function BV(n: number): number
 }
 
 
-export function numberEnding(value: number, names: [string, string, string, string])
+export function numberEnding(value: number, names: [string, string, string])
 {
 	let n=value % 100;
 	
