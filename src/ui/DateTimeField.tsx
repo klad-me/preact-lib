@@ -11,7 +11,7 @@ function dateValidator(s: string): boolean
 {
 	if (! s.match(/^\d+\.\d+\.\d+$/)) return false;
 	const [ date, month, year ] = s.split('.').map(Number);
-	if ( (year < 2020) || (year > 2099) || (month < 1) || (month > 12) ) return false;
+	if ( (year < 1970) || (year > 2099) || (month < 1) || (month > 12) ) return false;
 	let days = daysInMonth[month-1];
 	if ( (month == 2) && ((year % 4) == 0) ) days++;
 	return (date >= 1) && (date <= days);
@@ -35,7 +35,7 @@ function dateTimeValidator(s: string): boolean
 
 
 type DateTimeFieldProps = {
-	value: Date;
+	value: Date | undefined;
 	seconds?: boolean;
 	onInput?: (value: Date) => void;
 	clickEvent?: Event<unknown>;
@@ -45,11 +45,11 @@ type DateTimeFieldProps = {
 export function DateField(props: DateTimeFieldProps)
 {
 	const d=props.value;
-	const value=zeroPad(d.getDate(), 2) + '.' + zeroPad(d.getMonth()+1, 2) + '.' + zeroPad(d.getFullYear(), 4);
+	const value=(d !== undefined) ? (zeroPad(d.getDate(), 2) + '.' + zeroPad(d.getMonth()+1, 2) + '.' + zeroPad(d.getFullYear(), 4)) : '...';
 
 	const onInput = useCallback( (value: string) => {
 		const [ date, month, year ] = value.split('.').map(Number);
-		let d=new Date(props.value);
+		let d=new Date(props.value!);
 		d.setFullYear(year);
 		d.setMonth(month-1);
 		d.setDate(date);
@@ -64,11 +64,11 @@ export function TimeField(props: DateTimeFieldProps)
 {
 	const seconds = (props.seconds ?? true);
 	const d=props.value;
-	const value=zeroPad(d.getHours(), 2) + ':' + zeroPad(d.getMinutes(), 2) + (seconds ? (':' + zeroPad(d.getSeconds(), 2)) : '');
+	const value=(d !== undefined) ? (zeroPad(d.getHours(), 2) + ':' + zeroPad(d.getMinutes(), 2) + (seconds ? (':' + zeroPad(d.getSeconds(), 2)) : '')) : '...';
 
 	const onInput = useCallback( (value: string) => {
 		const [ hour, min, sec ] = value.split(':').map(Number);
-		let d=new Date(props.value);
+		let d=new Date(props.value!);
 		d.setHours(hour);
 		d.setMinutes(min);
 		d.setSeconds(~~sec);
@@ -85,14 +85,16 @@ export function DateTimeField(props: DateTimeFieldProps)
 	const seconds = (props.seconds ?? true);
 	const d=props.value;
 	const value=
-		zeroPad(d.getDate(), 2) + '.' + zeroPad(d.getMonth()+1, 2) + '.' + zeroPad(d.getFullYear(), 4) + '  ' +
-		zeroPad(d.getHours(), 2) + ':' + zeroPad(d.getMinutes(), 2) + (seconds ? (':' + zeroPad(d.getSeconds(), 2)) : '');
+		(d !== undefined) ? (
+			zeroPad(d.getDate(), 2) + '.' + zeroPad(d.getMonth()+1, 2) + '.' + zeroPad(d.getFullYear(), 4) + '  ' +
+			zeroPad(d.getHours(), 2) + ':' + zeroPad(d.getMinutes(), 2) + (seconds ? (':' + zeroPad(d.getSeconds(), 2)) : '') ) :
+			'...';
 
 	const onInput = useCallback( (value: string) => {
 		const [ strDate, strTime ] = value.split(/\s+/);
 		const [ date, month, year ] = strDate.split('.').map(Number);
 		const [ hour, min, sec ] = strTime.split(':').map(Number);
-		let d=new Date(props.value);
+		let d=new Date(props.value!);
 		d.setFullYear(year);
 		d.setMonth(month-1);
 		d.setDate(date);

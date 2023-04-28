@@ -13,8 +13,8 @@ function hhmmValidator(value: string): boolean
 
 
 type HHMMFieldProps = {
-	value: number;
-	onInput: (value: number) => void;
+	value: number | undefined;
+	onInput?: (value: number) => void;
 	style?: string;
 	clickEvent?: Event<unknown>;
 };
@@ -22,10 +22,10 @@ type HHMMFieldProps = {
 
 export function HHMMField(props: HHMMFieldProps)
 {
-	const value=zeroPad(~~(props.value / 60), 2) + ':' + zeroPad(props.value % 60, 2);
+	const value=(props.value !== undefined) ? (zeroPad(~~(props.value / 60), 2) + ':' + zeroPad(props.value % 60, 2)) : undefined;
 	const onInput = useCallback( (value: string) => {
 		const [ hh, mm ] = value.split(':').map(Number);
-		props.onInput(hh*60+mm);
+		('function' == typeof props.onInput) && props.onInput(hh*60+mm);
 	}, [props.onInput]);
 
 	return <TextField value={value} onInput={('function' == typeof props.onInput) ? onInput : undefined} validator={hhmmValidator} inputMode="decimal" style={props.style} clickEvent={props.clickEvent} />;
