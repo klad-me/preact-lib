@@ -43,7 +43,7 @@ export function TextField(props: TextFieldProps)
 
 	const valid = editorOpen ?
 		validator(editorText ?? '') :
-		(props.value !== undefined) && validator(props.value);
+		(props.value === undefined) || validator(props.value);
 	
 	const editorOK = useCallback( () => {
 		setEditorOpen(false);

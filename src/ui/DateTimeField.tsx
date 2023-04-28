@@ -45,7 +45,7 @@ type DateTimeFieldProps = {
 export function DateField(props: DateTimeFieldProps)
 {
 	const d=props.value;
-	const value=(d !== undefined) ? (zeroPad(d.getDate(), 2) + '.' + zeroPad(d.getMonth()+1, 2) + '.' + zeroPad(d.getFullYear(), 4)) : '...';
+	const value=(d !== undefined) ? (zeroPad(d.getDate(), 2) + '.' + zeroPad(d.getMonth()+1, 2) + '.' + zeroPad(d.getFullYear(), 4)) : undefined;
 
 	const onInput = useCallback( (value: string) => {
 		const [ date, month, year ] = value.split('.').map(Number);
@@ -64,7 +64,7 @@ export function TimeField(props: DateTimeFieldProps)
 {
 	const seconds = (props.seconds ?? true);
 	const d=props.value;
-	const value=(d !== undefined) ? (zeroPad(d.getHours(), 2) + ':' + zeroPad(d.getMinutes(), 2) + (seconds ? (':' + zeroPad(d.getSeconds(), 2)) : '')) : '...';
+	const value=(d !== undefined) ? (zeroPad(d.getHours(), 2) + ':' + zeroPad(d.getMinutes(), 2) + (seconds ? (':' + zeroPad(d.getSeconds(), 2)) : '')) : undefined;
 
 	const onInput = useCallback( (value: string) => {
 		const [ hour, min, sec ] = value.split(':').map(Number);
@@ -88,7 +88,7 @@ export function DateTimeField(props: DateTimeFieldProps)
 		(d !== undefined) ? (
 			zeroPad(d.getDate(), 2) + '.' + zeroPad(d.getMonth()+1, 2) + '.' + zeroPad(d.getFullYear(), 4) + '  ' +
 			zeroPad(d.getHours(), 2) + ':' + zeroPad(d.getMinutes(), 2) + (seconds ? (':' + zeroPad(d.getSeconds(), 2)) : '') ) :
-			'...';
+			undefined;
 
 	const onInput = useCallback( (value: string) => {
 		const [ strDate, strTime ] = value.split(/\s+/);
