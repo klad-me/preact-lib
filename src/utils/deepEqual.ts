@@ -22,6 +22,12 @@ function isDeepEqual(object1: any, object2: any): boolean
 };
 
 
+/**
+ * Глубокое сравнение двух объектов по значениям
+ * @param object1 объект 1
+ * @param object2 объект 2
+ * @returns true, если объекты идентичны
+ */
 export function deepEqual(object1: any, object2: any): boolean
 {
 	if (isObject(object1) && isObject(object2))

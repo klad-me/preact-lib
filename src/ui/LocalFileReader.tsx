@@ -1,13 +1,25 @@
 import { useState, useRef, useCallback } from "preact/hooks";
 
 
+/**
+ * Аттрибуты для \<LocalFileReader/>
+ */
 export type LocalFileReaderProps = {
+	/** Допустимые форматы файлов (аттрибут accept \<input/>) */
 	accept?: string;
+	/** Обработчик успешной загрузки файла */
 	onLoad: (data: ArrayBuffer, name: string) => void;
+	/** Обработчик ошибки загрузки файла или текст ошибки */
 	onError?: ((name: string, error: ProgressEvent<FileReader>) => void) | string;
 };
 
-export function LocalFileReader({ accept, onLoad, onError }: LocalFileReaderProps )
+
+/**
+ * Позволяет загружать файл с локального диска
+ * @param props аттрибуты
+ * @returns 
+ */
+export function LocalFileReader(props: LocalFileReaderProps )
 {
 	const fileRef = useRef<HTMLInputElement>(null);
 	const [ inputEnabled, setInputEnabled ] = useState(true);
@@ -25,20 +37,20 @@ export function LocalFileReader({ accept, onLoad, onError }: LocalFileReaderProp
 		let fr=new FileReader();
 		fr.onload = () => {
 			setInputEnabled(true);
-			onLoad(fr.result as ArrayBuffer, fileName);
+			props.onLoad(fr.result as ArrayBuffer, fileName);
 		};
 		fr.onerror = (error) => {
-			if ('string' == typeof onError)
-				alert(onError); else
-			if (onError)
-				onError(fileName, error);
+			if ('string' == typeof props.onError)
+				alert(props.onError); else
+			if (props.onError)
+				props.onError(fileName, error);
 			
 			setInputEnabled(true);
 		};
 		fr.readAsArrayBuffer(fileRef.current.files[0]);
-	}, [onLoad, onError]);
+	}, [props.onLoad, props.onError]);
 	
 	return (
-		<input type="file" ref={fileRef} disabled={! inputEnabled} onInput={fileSelected} accept={accept} />
+		<input type="file" ref={fileRef} disabled={! inputEnabled} onInput={fileSelected} accept={props.accept} />
 	);
 }

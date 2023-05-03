@@ -2,6 +2,11 @@ import { useCallback } from 'preact/hooks';
 import { TextField, TextFieldProps } from './TextField';
 
 
+/**
+ * Отображает или позволяет ввести IP-адрес (как текст)
+ * @param props аттрибуты
+ * @returns 
+ */
 export function IPField(props: TextFieldProps)
 {
 	const validator = useCallback( (value: string) => {

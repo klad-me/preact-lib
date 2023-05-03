@@ -7,21 +7,35 @@ import clsx from 'clsx';
 import { useTr } from '../tr';
 
 
+/** Валидатор для текстового значения */
 export type TextFieldValidator = (value: string) => boolean;
 
+/** Обработчик ввода для \<TextField/> */
 export type TextFieldOnInput = (value: string) => void;
 
+/** Аттрибуты для \<TextField/> */
 export type TextFieldProps =
 {
+	/** Значение */
 	value: string | undefined;
+	/** Обработчик ввода, если undefined - значение readonly */
 	onInput?: TextFieldOnInput;
+	/** Валидатор для значения */
 	validator?: TextFieldValidator;
+	/** Стиль для \<input/> */
 	style?: string;
+	/** События для открытия редактора */
 	clickEvent?: Event<unknown>;
+	/** Тип ввода для \<input/> */
 	inputMode?: string;
 };
 
 
+/**
+ * Отображает и позволяет радактировать текстовое значение
+ * @param props аттрибуты
+ * @returns 
+ */
 export function TextField(props: TextFieldProps)
 {
 	const tr = useTr();

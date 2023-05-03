@@ -2,12 +2,19 @@
 const deniedVars = [ 'window', 'document' ];
 
 
-type EvalExprArgs = {
+/** Переменные для evalExpr() */
+export type EvalExprArgs = {
 	[key: string]: any;
 };
 
 
-export function EvalExpr(expr: string, vars?: EvalExprArgs)
+/**
+ * Выполнить JS-выражение в песочнице и вернуть результат
+ * @param expr выражение
+ * @param vars переменные для окружения
+ * @returns результат выполнения
+ */
+export function evalExpr(expr: string, vars?: EvalExprArgs)
 {
 	// Создаем аргументы и значения для функции
 	let args=[ ...deniedVars ], values=Array(deniedVars.length).fill(undefined);

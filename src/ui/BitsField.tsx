@@ -8,18 +8,32 @@ import { useTr } from '../tr';
 
 export type BitsFieldOnInput = (value: number) => void;
 
+
+/** Аттрибуты \<BitsFiled/> */
 export type BitsFieldProps =
 {
+	/** Значение */
 	value: number | undefined;
+	/** Обработчик ввода, если он не указан, то значение readonly */
 	onInput?: BitsFieldOnInput;
+	/** Маска отключенных элеметов (битов), они выводиться в список не будут */
 	disabledMask?: number;
+	/** Расположение списка битов */
 	layout?: 'vertical' | 'horizontal';
+	/** Привязка бит-назначение */
 	items: string[] | { [key: number]: string };
+	/** Событие для открытия редкатора */
 	clickEvent?: Event<unknown>;
+	/** Требуется ли развернуть список сразу */
 	open?: boolean;
 };
 
 
+/**
+ * Отображает и позволяет редактирование числовое значение путем изменения конкретных битов
+ * @param props аттрибуты
+ * @returns 
+ */
 export function BitsField(props: BitsFieldProps)
 {
 	const [ open, setOpen ] = useState(props.open ?? false);

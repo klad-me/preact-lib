@@ -1,9 +1,15 @@
 import S from './Theme.module.scss';
 
 
-type UiThemeList = 'light' | 'dark';
+/** Тема UI */
+export type UiTheme = 'light' | 'dark';
 
-export function setUiTheme(theme: UiThemeList): void
+
+/**
+ * Установить тему UI
+ * @param theme тема
+ */
+export function setUiTheme(theme: UiTheme): void
 {
 	switch (theme)
 	{
@@ -19,7 +25,11 @@ export function setUiTheme(theme: UiThemeList): void
 }
 
 
-export function getUiTheme(): UiThemeList
+/**
+ * Получить текущую тему UI
+ * @returns тема
+ */
+export function getUiTheme(): UiTheme
 {
 	if (document.body.classList.contains(S.darkTheme))
 		return 'dark'; else

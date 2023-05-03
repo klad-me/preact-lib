@@ -4,11 +4,20 @@ import { ComponentChildren, toChildArray, VNode } from 'preact';
 import { useState, useMemo } from 'preact/hooks';
 
 
-type TabProps = {
+/** Аттрибуты для \<Tab/> */
+export type TabProps = {
+	/** Название вкладки */
 	name: string;
+	/** Содержимое */
 	children: ComponentChildren;
 };
 
+
+/**
+ * Определить вкладку внутри \<{@link TabContainer}/>
+ * @param props аттрибуты
+ * @returns 
+ */
 export function Tab(props: TabProps)
 {
 	return <> {props.children} </>;
@@ -34,13 +43,28 @@ function TabButtons(props: TabButtonsProps)
 }
 
 
-type TabContainerProps = {
+/** Аттрибуты для \<TabContainer/> */
+export type TabContainerProps = {
+	/** Расположение кнопок выбора вкладки (по-умолчанию 'top') */
 	buttons?: 'top' | 'bottom';
+	/** Начальная выбранная вкладка */
 	current?: number;
+	/** Вкладки, элементы \<{@link Tab}/> */
 	children: ComponentChildren;
 };
 
 
+/**
+ * Отображает кнопки выбора вкладок и область содержимого
+ * @param props аттрибуты
+ * @returns 
+ * 
+ * @example
+ * <TabContainer>
+ *   <Tab name="Hello">Hello world</Tab>
+ *   <Tab name="World">World hello</Tab>
+ * </TabContainer>
+ */
 export function TabContainer(props: TabContainerProps)
 {
 	const tabs = useMemo( () => 

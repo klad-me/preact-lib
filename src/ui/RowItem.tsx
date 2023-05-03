@@ -4,16 +4,31 @@ import { ComponentChildren, toChildArray, VNode } from 'preact';
 import clsx from 'clsx';
 
 
-interface RowItemProps
-{
+/**
+ * Аттрибуты для \<RowItem/>
+ */
+export type RowItemProps = {
+	/** Название */
 	name: string;
+	/** Значение в виде строки, если undefined - значение берется из children */
 	value?: string;
+	/** Единица измерения, если undefined - выделенного поля не будет */
 	unit?: string;
+	/** Обработчик клика */
 	onClick?: () => void;
+	/** Можно ли кликать по элементу (будет меняться курсор) */
 	clickable?: boolean;
+	/** Значение */
 	children?: ComponentChildren;
 };
 
+
+/**
+ * Отображает строку, содержащую 3 части: название (выравнено влево), значение (выравнено вправо) и единица измерения (отдельное поле справа с выравниванием влево).<br/>
+ * Отправляет событие clickEvent при клике на элемент (событие может обработать элемент-значение).
+ * @param props аттрибуты
+ * @returns 
+ */
 export function RowItem(props: RowItemProps)
 {
 	const ev = useEvent();

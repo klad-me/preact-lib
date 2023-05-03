@@ -3,15 +3,26 @@ import { DateTimeField } from "./DateTimeField";
 import { Event } from "../hooks";
 
 
-type UnixTimeFieldProps = {
+/** Аттрибуты для \<UnixTimeField/> */
+export type UnixTimeFieldProps = {
+	/** Значение */
 	value?: number;
+	/** Требуется ли выводить секунды, по-умолчанию да */
 	seconds?: boolean;
+	/** Обработчик ввода, если undefined - значение readonly */
 	onInput: (value: number) => void;
+	/** Значение unixtime в UTC или локальное время */
 	utc?: boolean;
+	/** Событие для открытия редактора */
 	clickEvent?: Event<unknown>;
 };
 
 
+/**
+ * Отображает и позволяет редактировать дату и время в формате unixtime
+ * @param props аттрибуты
+ * @returns 
+ */
 export function UnixTimeField(props: UnixTimeFieldProps)
 {
 	const tzOffset=props.utc ? 0 : (new Date()).getTimezoneOffset()*60;

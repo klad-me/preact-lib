@@ -8,13 +8,31 @@ import { useTr } from '../tr';
 type AsyncState = 'loading' | 'done' | 'failed';
 
 
-type AsyncProps = {
+/**
+ * Аттрибуты для \<Async/>
+ */
+export type AsyncProps = {
+	/** Асинхронная функция загрузки контента */
 	loader: () => Promise<VNode>;
+	/** Текст, выводимый при загрузке */
 	loadingText?: string;
+	/** Текст, выводимый при ошибке загрузки */
 	errorText?: string;
 };
 
 
+/**
+ * Выводит спиннер и текст загрузки, пока асинхронная функция-загрузчик выполняется. Потом выводит результат работы функции
+ * @param props аттрибуты
+ * @returns 
+ * 
+ * @example
+ * const loader = useCallback( async () => {
+ *   await sleep(1000);
+ *   return <div>Hello world</div>;
+ * }, []);
+ * return <Async loader={loader} />;
+ */
 export function Async(props: AsyncProps): VNode
 {
 	const [ state, setState ] = useState<AsyncState>('loading');

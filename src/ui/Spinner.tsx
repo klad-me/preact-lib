@@ -9,6 +9,7 @@ const ev = new Event<boolean>();
 let spinnerCount=0;
 
 
+/** Элемент, отображающий полноэкранный спиннер, должен быть определен только в одном месте */
 export function SpinnerElement()
 {
 	const [ visible, setVisible ] = useState(false);
@@ -18,6 +19,7 @@ export function SpinnerElement()
 }
 
 
+/** Показать полноэкранный спиннер. Должен быть соответствующий вызов {@link hideSpinner} */
 export function showSpinner()
 {
 	spinnerCount++;
@@ -25,6 +27,7 @@ export function showSpinner()
 }
 
 
+/** Закрыть полноэкранный спиннер. Ранее спиннер должен быть открыт через {@link showSpinner} */
 export function hideSpinner()
 {
 	spinnerCount--;
@@ -32,6 +35,10 @@ export function hideSpinner()
 }
 
 
+/**
+ * Хук для управления отображением полноэкранного спиннера
+ * @param on включение отображения спиннера
+ */
 export function useSpinner(on: boolean = true)
 {
 	useScreenBlank(on);

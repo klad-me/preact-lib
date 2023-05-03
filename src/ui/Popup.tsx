@@ -8,7 +8,9 @@ import { InlineSpinner } from './InlineSpinner';
 import { trContextType } from '../tr';
 
 
+/** Аттрибуты для элемента customPopup() */
 export type CustomPopupProps = {
+	/** Необходимо вызвать для закрытия всплывалки */
 	onClose?: () => void;
 };
 
@@ -26,6 +28,10 @@ function closePopup(cb?: () => void)
 }
 
 
+/**
+ * Элемент, в который будут вставляться всплывалки. Необходимо использовать только где-то в одном месте.
+ * @returns 
+ */
 export function PopupElement()
 {
 	const [ , update ] = useState({});
@@ -41,6 +47,13 @@ export function PopupElement()
 }
 
 
+/**
+ * Вывести всплывалку с одной кнопкой 'OK'
+ * @param tr переводчик интерфейса
+ * @param header заголовок
+ * @param content содержимое
+ * @param onOK обработчик закрытия всплывалки
+ */
 export function popup(tr: trContextType, header: string, content: string | ComponentChild, onOK?: () => void)
 {
 	popupStack.push(
@@ -54,6 +67,14 @@ export function popup(tr: trContextType, header: string, content: string | Compo
 }
 
 
+/**
+ * Вывести всплывалку запроса с кнопками 'OK' и 'Отмена'
+ * @param tr переводчик интерфейса
+ * @param header заголовок
+ * @param content содержимое
+ * @param onOk обработчик нажатия 'OK'
+ * @param onCancel обработчик нажатия 'Отмена'
+ */
 export function ask(tr: trContextType, header: string, content: string | ComponentChild, onOk?: () => void, onCancel?: () => void)
 {
 	popupStack.push(
@@ -70,6 +91,21 @@ export function ask(tr: trContextType, header: string, content: string | Compone
 }
 
 
+/**
+ * Вывести всплывалку с указанным элементом внутри.
+ * @param content содержимое
+ * 
+ * @example
+ * function MyPopup(props: CustomPopupProps)
+ * {
+ *   return <div>Hello world <button onClick={props.onClose}>Закрыть</button></div>
+ * }
+ * 
+ * customPopup(<MyPopup />);
+ * 
+ * @see {@link CustomPopupProps}
+ * 
+ */
 export function customPopup(content: PopupContent)
 {
 	content.props.onClose=closePopup;
@@ -78,6 +114,14 @@ export function customPopup(content: PopupContent)
 }
 
 
+/**
+ * Вывести всплывалку со спиннером ожидания выполнения промиса
+ * @param tr переводчик интерфейса
+ * @param promise промис, который надо ожидать
+ * @param onDone обработчик завершения выполнения
+ * @param onError обработчик ошибки выполнения
+ * @param loadingText текст в окне ожидания
+ */
 export function waitPromise<T=void>(tr: trContextType, promise: Promise<T>, onDone?: (result: T) => void, onError?: (error: Error) => void, loadingText?: string)
 {
 	popupStack.push(
@@ -104,6 +148,10 @@ export function waitPromise<T=void>(tr: trContextType, promise: Promise<T>, onDo
 }
 
 
+
+/**
+ * Закрыть все открытые всплывалки
+ */
 export function closeAllPopups()
 {
 	popupStack=[];

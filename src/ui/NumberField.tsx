@@ -3,23 +3,39 @@ import { TextField, TextFieldOnInput, TextFieldValidator } from './TextField';
 import { Event } from '../hooks';
 
 
+/** Функция-валидатор значения для \<NumberField/> */
 export type NumberFieldValidator = (value: number) => boolean;
 
+/** Функция-обработчик ввода для \<NumberField/> */
 export type NumberFieldOnInput = (value: number) => void;
 
+/** Аттрибуты для \<NumberField/> */
 export type NumberFieldProps =
 {
+	/** Значение */
 	value: number | undefined;
+	/** Обработчик ввода, если не указан - значение readonly */
 	onInput?: NumberFieldOnInput;
+	/** Количество точек после запятой */
 	dp?: number;
+	/** Валидатор для значения */
 	validator?: NumberFieldValidator;
+	/** Минимально допустимое значение */
 	min?: number;
+	/** Максимально допустимое значени */
 	max?: number;
+	/** Стиль для \<input/> */
 	style?: string;
+	/** Событие для открытия редактора */
 	clickEvent?: Event<unknown>;
 };
 
 
+/**
+ * Отображает и позволяет редактировать числовое значение
+ * @param props аттрибуты
+ * @returns 
+ */
 export function NumberField(props: NumberFieldProps)
 {
 	const dp=props.dp || 0;

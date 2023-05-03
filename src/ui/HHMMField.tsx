@@ -12,14 +12,26 @@ function hhmmValidator(value: string): boolean
 }
 
 
-type HHMMFieldProps = {
+/**
+ * Аттрибуты для \<HHMMField/>
+ */
+export type HHMMFieldProps = {
+	/** Значение ЧЧ*60+ММ */
 	value: number | undefined;
+	/** Обработчик ввода, если не определен - значение readonly */
 	onInput?: (value: number) => void;
+	/** Стиль для \<input/> */
 	style?: string;
+	/** Событие для открытия редактора */
 	clickEvent?: Event<unknown>;
 };
 
 
+/**
+ * Отображает и редактирует значение ЧЧ:ММ, хранимое в числе в формате ЧЧ*60+ММ
+ * @param props аттрибуты
+ * @returns 
+ */
 export function HHMMField(props: HHMMFieldProps)
 {
 	const value=(props.value !== undefined) ? (zeroPad(~~(props.value / 60), 2) + ':' + zeroPad(props.value % 60, 2)) : undefined;

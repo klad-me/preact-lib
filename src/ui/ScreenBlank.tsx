@@ -9,6 +9,7 @@ const ev = new Event<boolean>();
 let blankCount=0;
 
 
+/** Элемент, используемый для затенения экрана. Требуется определить только в одном месте. */
 export function ScreenBlankElement()
 {
 	const [ blank, setBlank ] = useState(false);
@@ -17,6 +18,9 @@ export function ScreenBlankElement()
 }
 
 
+/**
+ * Затенить экран. Должен быть соответствующий вызов {@link unblankScreen}
+ */
 export function blankScreen()
 {
 	blankCount++;
@@ -24,6 +28,9 @@ export function blankScreen()
 }
 
 
+/**
+ * Убрать затенение экрана. Экран ранее должен быть затененным через {@link blankScreen}
+ */
 export function unblankScreen()
 {
 	blankCount--;
@@ -31,6 +38,10 @@ export function unblankScreen()
 }
 
 
+/**
+ * Хук, управляющий затенением экрана
+ * @param on включение затенения
+ */
 export function useScreenBlank(on: boolean = true)
 {
 	useEffect( () => {

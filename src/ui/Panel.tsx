@@ -5,15 +5,26 @@ import { useState, useCallback } from 'preact/hooks';
 import clsx from 'clsx';
 
 
-type PanelProps = {
+/** Аттрибуты для \<Panel/> */
+export type PanelProps = {
+	/** Заголовок панели */
 	title: string;
+	/** Обработчик клика по заголовку */
 	onHeaderClick?: () => void;
+	/** Требуется ли возможность сворачивания в заголовок */
 	toggleable?: boolean;
+	/** Если false, то по-умолчанию панель будет свернута */
 	open?: boolean;
+	/** Содержимое панели */
 	children?: ComponentChildren;
 };
 
 
+/**
+ * Отображает панель с заголовком
+ * @param props аттрибуты
+ * @returns 
+ */
 export function Panel(props: PanelProps)
 {
 	const [ open, setOpen] = useState((props.open !== undefined) ? props.open : true);

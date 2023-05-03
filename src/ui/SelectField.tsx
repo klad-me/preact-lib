@@ -5,18 +5,31 @@ import clsx from 'clsx';
 import { useTr } from '../tr';
 
 
+/** Обработчик ввода \<SelectField/> */
 export type SelectFieldOnInput = (value: number) => void;
 
+
+/** Аттрибуты для \<SelectField/> */
 export type SelectFieldProps =
 {
+	/** Значение */
 	value: number | undefined;
+	/** Обработчик ввода, если undefined - значение readonly */
 	onInput?: SelectFieldOnInput;
+	/** Соответствие ключ-назначение */
 	items: string[] | { [key: number]: string };
+	/** Стиль для \<input/> */
 	style?: string;
+	/** Событие для запуска редактора */
 	clickEvent?: Event<unknown>;
 };
 
 
+/**
+ * Отображает текстовое представление значения из словаря, а также позволяет его редактировать (выбирать из списка)
+ * @param props аттрибуты
+ * @returns 
+ */
 export function SelectField(props: SelectFieldProps)
 {
 	const editable = ('function' == typeof props.onInput);

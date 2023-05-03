@@ -31,6 +31,10 @@ function run(): void
 }
 
 
+/**
+ * Выполнить обработчик позже
+ * @param cb обработчик
+ */
 export function runLater(cb: RunLaterCallback): void
 {
 	list.push({ cb, callStack: (new Error()).stack });

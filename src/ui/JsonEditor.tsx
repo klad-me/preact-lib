@@ -8,7 +8,7 @@ import { TextField } from './TextField';
 import { NumberField } from './NumberField';
 import { SelectField } from './SelectField';
 import { BitsField } from './BitsField';
-import { EvalExpr } from '../utils';
+import { evalExpr } from '../utils';
 import { useTr } from '@preact-lib/tr';
 
 
@@ -38,7 +38,7 @@ function ifExpr(schema: JsonValueSchema, value: { [key: string]: any }, updateFn
 	context.ev?.use( () => updateFn({}), [] );
 	try
 	{
-		return EvalExpr(schema.if, { '$': context.root, ...value });
+		return evalExpr(schema.if, { '$': context.root, ...value });
 	} catch (e)
 	{
 		return true;
@@ -166,7 +166,7 @@ function EditArray(props: EditArrayProps)
 			name.substring(1);
 			try
 			{
-				return EvalExpr(name.substring(1), { '$': idx });
+				return evalExpr(name.substring(1), { '$': idx });
 			} catch (e)
 			{
 				return '(#' + (idx+1) + ')';
@@ -241,13 +241,24 @@ function EditItem(props: EditItemProps)
 }
 
 
-type JsonEditorProps = {
+/**
+ * Аттрибуты \<JsonEditor/>
+ */
+export type JsonEditorProps = {
+	/** Объект для редактирования */
 	value: any;
+	/** Схема */
 	schema: JsonObjectSchema;
+	/** Обработчик изменения значения */
 	onChange?: (value: any) => void;
 };
 
 
+/**
+ * Позволяет отображать и редактировать объект согласно указанной JSON-схеме
+ * @param props аттрибуты
+ * @returns 
+ */
 export function JsonEditor(props: JsonEditorProps)
 {
 	const tr = useTr();

@@ -34,14 +34,26 @@ function dateTimeValidator(s: string): boolean
 }
 
 
-type DateTimeFieldProps = {
+/**
+ * Аттрибуты для \<DateField/>, \<TimeField/> и \<DateTimeField/>
+ */
+export type DateTimeFieldProps = {
+	/** Значение */
 	value: Date | undefined;
+	/** Требуется ли отображать секунды (по-умолчанию - да) */
 	seconds?: boolean;
+	/** Обработчик изменения значения, если не указан - значение readonly */
 	onInput?: (value: Date) => void;
+	/** Событие для открытия редактора */
 	clickEvent?: Event<unknown>;
 };
 
 
+/**
+ * Отображает и позволяет редактировать дату в формат ДД.ММ.ГГГГ
+ * @param props аттрибуты
+ * @returns 
+ */
 export function DateField(props: DateTimeFieldProps)
 {
 	const d=props.value;
@@ -60,6 +72,11 @@ export function DateField(props: DateTimeFieldProps)
 }
 
 
+/**
+ * Отображает и позволяет редактировать время в формате ЧЧ:ММ[:СС]
+ * @param props аттрибуты
+ * @returns 
+ */
 export function TimeField(props: DateTimeFieldProps)
 {
 	const seconds = (props.seconds ?? true);
@@ -80,6 +97,11 @@ export function TimeField(props: DateTimeFieldProps)
 }
 
 
+/**
+ * Отображает и позволяет редактировать дату и время в формате ДД.ММ.ГГГГ ЧЧ:ММ[:СС]
+ * @param props аттрибуты
+ * @returns 
+ */
 export function DateTimeField(props: DateTimeFieldProps)
 {
 	const seconds = (props.seconds ?? true);

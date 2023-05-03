@@ -2,15 +2,44 @@ import { ComponentChildren, JSX, createContext } from "preact";
 import { useContext, useMemo } from "preact/hooks";
 
 
+/**
+ * Тип для описания базы перевода
+ */
 export type TrDatabase = {
 	[ key: string ]: string | string[] | TrDatabase;
 };
 
 
-type trFnType = (id: string, text: string, ...args: any[]) => string;
-type trListFnType = (id: string, list: string[]) => string[];
-type trListNFnType = (id: string, list: string[], index: number, ...args: any[]) => string;
+/**
+ * Функция для перевода строки с подстановкой аргументов
+ * @param id идентификатор строки
+ * @param text текст по-умолчанию
+ * @param args аргументы %1..%9
+ * @returns перевод текста
+ */
+export type trFnType = (id: string, text: string, ...args: any[]) => string;
 
+/**
+ * Функция для перевода списка
+ * @param id идентификатор списка
+ * @param list список по-умолчанию
+ * @returns перевод списка
+ */
+export type trListFnType = (id: string, list: string[]) => string[];
+
+/**
+ * Функция для перевода элемента списка с подстановкой аргументов
+ * @param id идентификатор списка
+ * @param list список по-умолчанию
+ * @param index индекс элемента списка
+ * @param args аргументы %1..%9
+ * @return перевод элемента списка
+ */
+export type trListNFnType = (id: string, list: string[], index: number, ...args: any[]) => string;
+
+/**
+ * Контекст для перевода
+ */
 export type trContextType = trFnType & {
 	tr: trContextType;
 	trList: trListFnType;
@@ -73,12 +102,28 @@ function makeContext(db?: TrDatabase): trContextType
 const trContext = createContext<trContextType>(makeContext());
 
 
-type TrProviderProps = {
+/**
+ * Аттрибуты для переводчика интерфейса
+ */
+export type TrProviderProps = {
+	/** База переводов, если undefined - будет возвращаться текст по-умолчанию */
 	tr?: TrDatabase;
+
+	/** Элементы для перевода */
 	children: ComponentChildren;
 };
 
 
+/**
+ * Источник перевода интерфейса
+ * @param props аттрибуты
+ * @returns 
+ * 
+ * @example
+ * <TrProvider tr={en_json}>
+ *   <Application />
+ * </TrProvider>
+ */
 export function TrProvider(props: TrProviderProps)
 {
 	const ctx = useMemo(() => makeContext(props.tr), [props.tr]);
@@ -119,10 +164,33 @@ function replaceArgs(id: string, text: string, args: any[]): string
 }
 
 
+/**
+ * Хук, возвращающий текущий переводчик интерфейса
+ * @returns функции для перевода
+ * 
+ * @example
+ * // Можно использовать просто tr()
+ * const tr = useTr();
+ * 
+ * // Можно использовать tr(), trList(), trListN()
+ * const { tr, trList, trListN } = useTr();
+ */
 export function useTr()
 {
 	return useContext(trContext);
 }
 
 
+/**
+ * Cunsomer-обертка для контекста перевода для использования в класс-компонентах
+ * 
+ * @example
+ * render() {
+ *   return (
+ *     <UseTr>
+ *       {(tr) => tr("hello.world", "Hello world")}
+ *     </UseTr>
+ *   );
+ * }
+ */
 export const UseTr = trContext.Consumer;

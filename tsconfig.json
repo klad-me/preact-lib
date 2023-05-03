@@ -23,5 +23,10 @@
 		"importHelpers": true,
 		"resolveJsonModule": true,
 		"esModuleInterop": true
+	},
+	"typedocOptions": {
+		"entryPoints": [ "src/hooks/index.ts", "src/tr/index.tsx", "src/types/index.ts", "src/ui/index.ts", "src/utils/index.ts" ],
+		"out": "docs",
+		"sort": "source-order"
 	}
 }
