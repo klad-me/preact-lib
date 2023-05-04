@@ -57,5 +57,5 @@ export function NumberField(props: NumberFieldProps)
 		return true;
 	}, [dp, props]);
 
-	return <TextField value={value} onInput={onInput} validator={validator} style={props.style} clickEvent={props.clickEvent} inputMode="decimal" />;
+	return <TextField value={value} onInput={onInput} validator={validator} style={props.style ?? "width: 4rem"} clickEvent={props.clickEvent} inputMode="decimal" />;
 }
