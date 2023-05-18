@@ -1,4 +1,5 @@
 export * from './JsonSchema';
+export * from './dim';
 
 
 /**
