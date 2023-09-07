@@ -5,3 +5,4 @@ export * from './useOrientation';
 export * from './useArrayState';
 export * from './useElementSize';
 export * from './usePointer';
+export * from './useStoredState';
