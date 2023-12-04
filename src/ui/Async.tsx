@@ -1,8 +1,11 @@
 import S from './Async.module.scss';
-import { VNode } from "preact";
-import { useEffect, useState } from "preact/hooks";
+import { useContext, useEffect, useState } from "preact/hooks";
 import { InlineSpinner } from './InlineSpinner';
 import { useTr } from '../tr';
+import { VNode, createContext } from 'preact';
+
+
+const asyncPropsContext = createContext({});
 
 
 type AsyncState = 'loading' | 'done' | 'failed';
@@ -11,9 +14,9 @@ type AsyncState = 'loading' | 'done' | 'failed';
 /**
  * Аттрибуты для \<Async/>
  */
-export type AsyncProps = {
+export type AsyncProps<T> = {
 	/** Асинхронная функция загрузки контента */
-	loader: () => Promise<VNode>;
+	loader: (props: T) => Promise<VNode>;
 	/** Текст, выводимый при загрузке */
 	loadingText?: string;
 	/** Текст, выводимый при ошибке загрузки */
@@ -33,14 +36,14 @@ export type AsyncProps = {
  * }, []);
  * return <Async loader={loader} />;
  */
-export function Async(props: AsyncProps): VNode
+export function Async<T extends object>(props: AsyncProps<T> & T): VNode
 {
 	const [ state, setState ] = useState<AsyncState>('loading');
 	const [ content, setContent ] = useState<VNode | undefined>();
 	const tr = useTr();
 
 	useEffect( () => {
-		props.loader()
+		props.loader(props)
 			.then( (result: VNode) => {
 				setContent(result);
 				setState('done');
@@ -58,7 +61,7 @@ export function Async(props: AsyncProps): VNode
 			return <InlineSpinner text={props.loadingText ?? tr("@preact-lib.loading", "Загрузка...")} center />
 		
 		case 'done':
-			return content || <div/>;
+			return <asyncPropsContext.Provider value={props}>{content ?? <div/>}</asyncPropsContext.Provider>;
 		
 		case 'failed':
 		default:
@@ -69,4 +72,10 @@ export function Async(props: AsyncProps): VNode
 				</div>
 			);
 	}
+}
+
+
+export function useAsyncProps<T extends object>()
+{
+	return useContext(asyncPropsContext) as T;
 }
