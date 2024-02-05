@@ -1,4 +1,4 @@
-import S from './Theme.module.scss';
+import './Theme.scss';
 
 
 /** Тема UI */
@@ -14,12 +14,12 @@ export function setUiTheme(theme: UiTheme): void
 	switch (theme)
 	{
 		case 'light':
-			document.body.classList.remove(S.darkTheme);
+			document.body.classList.remove('darkTheme');
 			break;
 		
 		case 'dark':
-			if (! document.body.classList.contains(S.darkTheme))
-				document.body.classList.add(S.darkTheme);
+			if (! document.body.classList.contains('darkTheme'))
+				document.body.classList.add('darkTheme');
 			break;
 	}
 }
@@ -31,7 +31,7 @@ export function setUiTheme(theme: UiTheme): void
  */
 export function getUiTheme(): UiTheme
 {
-	if (document.body.classList.contains(S.darkTheme))
+	if (document.body.classList.contains('darkTheme'))
 		return 'dark'; else
 		return 'light';
 }
