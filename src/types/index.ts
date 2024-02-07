@@ -1,5 +1,6 @@
 export * from './JsonSchema';
 export * from './dim';
+export * from './UnreachableCaseError';
 
 
 /**
