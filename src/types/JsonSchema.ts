@@ -34,6 +34,14 @@ export type JsonNumberSchema = JsonSchemaBase & {
 
 
 /**
+ * Тип для описание IPv4-значения JSON-схемы
+ */
+export type JsonIPv4Schema = JsonSchemaBase & {
+	type: 'ipv4';
+};
+
+
+/**
  * Тип для описания select-значения JSON-схемы
  */
 export type JsonSelectSchema = JsonSchemaBase & {
@@ -88,4 +96,4 @@ export type JsonObjectSchema = JsonSchemaBase & {
 /**
  * Тип для описания любого значения JSON-схемы
  */
-export type JsonValueSchema = JsonBooleanSchema | JsonNumberSchema | JsonSelectSchema | JsonBitsSchema | JsonStringSchema | JsonArraySchema | JsonObjectSchema;
+export type JsonValueSchema = JsonBooleanSchema | JsonNumberSchema | JsonIPv4Schema | JsonSelectSchema | JsonBitsSchema | JsonStringSchema | JsonArraySchema | JsonObjectSchema;

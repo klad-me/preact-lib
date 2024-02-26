@@ -10,6 +10,7 @@ import { SelectField } from './SelectField';
 import { BitsField } from './BitsField';
 import { evalExpr } from '../utils';
 import { useTr } from '@preact-lib/tr';
+import { IPField } from './IPField';
 
 
 const rightArrow='\u25B7', downArrow='\u25BD';
@@ -71,6 +72,21 @@ function Header(props: HeaderProps)
 }
 
 
+function fromIPv4(ip: number): string
+{
+	return String((ip >> 24) & 0xff) + '.' + String((ip >> 16) & 0xff) + '.' + String((ip >> 8) & 0xff) + '.' + String(ip & 0xff);
+}
+
+
+function toIPv4(text: string): number
+{
+	const re = text.match(/^(\d+)\.(\d+)\.(\d+)\.(\d+)$/);
+	if (! re) return 0;
+	const num = ((parseInt(re[1]) << 24) | (parseInt(re[2]) << 16) | (parseInt(re[3]) << 8) | parseInt(re[4]));
+	return ((parseInt(re[1]) << 24) | (parseInt(re[2]) << 16) | (parseInt(re[3]) << 8) | parseInt(re[4]));
+}
+
+
 type EditValueProps = {
 	title?: string;
 	value: any;
@@ -97,6 +113,10 @@ function EditValue(props: EditValueProps)
 			case 'boolean':
 				props.value[props.name]=Boolean(value);
 				break;
+			
+			case 'ipv4':
+				props.value[props.name]=toIPv4(value);
+				break;
 
 			default:
 				props.value[props.name]=value;
@@ -116,6 +136,10 @@ function EditValue(props: EditValueProps)
 			editor=<NumberField value={Number(value)} onInput={onInput} clickEvent={ev} />
 			break;
 		
+		case 'ipv4':
+			editor=<IPField value={fromIPv4(Number(value))} onInput={onInput} clickEvent={ev} />
+			break;
+
 		case 'boolean':
 			editor=<SelectField value={Number(value)} onInput={onInput} items={props.schema.items} clickEvent={ev} />
 			break;
@@ -218,6 +242,8 @@ type EditItemProps = {
 
 function EditItem(props: EditItemProps)
 {
+	if ( (props.value === undefined) || (props.value[props.name] === undefined) )
+		return null;
 	let item = props.value[props.name];
 
 	switch (props.schema.type)
@@ -231,6 +257,7 @@ function EditItem(props: EditItemProps)
 		case 'bits':
 		case 'boolean':
 		case 'number':
+		case 'ipv4':
 		case 'select':
 		case 'string':
 			return <EditValue title={props.title} value={props.value} name={props.name} schema={props.schema} level={props.level+1} />;
