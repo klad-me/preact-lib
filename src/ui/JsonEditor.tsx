@@ -141,7 +141,7 @@ function EditValue(props: EditValueProps)
 			break;
 
 		case 'boolean':
-			editor=<SelectField value={Number(value)} onInput={onInput} items={props.schema.items} clickEvent={ev} />
+			editor=<SelectField value={Number(Boolean(value))} onInput={onInput} items={props.schema.items} clickEvent={ev} />
 			break;
 		
 		case 'select':
