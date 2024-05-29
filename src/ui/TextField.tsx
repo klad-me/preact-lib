@@ -100,6 +100,7 @@ export function TextField(props: TextFieldProps)
 	{
 		// Редактор не открыт
 		let value: string | VNode = (props.value !== undefined) ? props.value : '...';
+		if (value == '') value='\xa0';	// иначе на поле нельзя будет нажать
 		if (! valid) value=<span class={S.incorrect}>{value}</span>;
 		return <div class={clsx(S.viewer, editable && S.editable)} onClick={openEditor} key="viewer">{value}</div>;
 	} else
