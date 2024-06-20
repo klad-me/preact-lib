@@ -129,11 +129,17 @@ function EditValue(props: EditValueProps)
 	switch (props.schema.type)
 	{
 		case 'string':
-			editor=<TextField value={String(value)} onInput={onInput} clickEvent={ev} />
+			{
+				const len = props.schema.length ?? 0;
+				editor=<TextField value={String(value)} onInput={onInput} validator={(len > 0) ? (s) => (s.length <= len) : undefined} clickEvent={ev} />
+			}
 			break;
 		
 		case 'number':
-			editor=<NumberField value={Number(value)} onInput={onInput} clickEvent={ev} />
+			{
+				const range = props.schema.range;
+				editor=<NumberField value={Number(value)} dp={props.schema.dp} validator={range ? (v) => ( (v >= range[0]) && (v <= range[1]) ) : undefined} onInput={onInput} clickEvent={ev} />
+			}
 			break;
 		
 		case 'ipv4':
