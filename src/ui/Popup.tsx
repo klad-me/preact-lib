@@ -17,13 +17,18 @@ export type CustomPopupProps = {
 type PopupContent = VNode<CustomPopupProps>;
 
 let popupStack: PopupContent[] = [];
+let activePopup: PopupContent | undefined = undefined;
 const ev = new Event<object>();
 
 
 function closePopup(cb?: () => void)
 {
 	('function' == typeof cb) && cb();
-	popupStack.pop();
+	if (activePopup !== undefined)
+	{
+		const idx = popupStack.indexOf(activePopup);
+		popupStack.splice(idx, 1);
+	}
 	ev.emit({});
 }
 
@@ -38,6 +43,10 @@ export function PopupElement()
 	ev.use(update);
 
 	useScreenBlank( popupStack.length > 0 );
+
+	if (popupStack.length > 0)
+		activePopup = popupStack[popupStack.length - 1]; else
+		activePopup = undefined;
 
 	return (
 		<div class={clsx(S.popup, (popupStack.length == 0) && 'hide')}>
