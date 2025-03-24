@@ -15,6 +15,8 @@ export type PanelProps = {
 	toggleable?: boolean;
 	/** Если false, то по-умолчанию панель будет свернута */
 	open?: boolean;
+	/** Если false, то содержимое будет удалено при скрытии */
+	keepHidden?: boolean;
 	/** Содержимое панели */
 	children?: ComponentChildren;
 };
@@ -40,7 +42,7 @@ export function Panel(props: PanelProps)
 				{ ( props.toggleable && ! open ) ? <span class={clsx(S.downArrow, "icon-down-big")} /> : null }
 			</header>
 			<div class={clsx(S.container, (! open) && 'hide')}>
-				{props.children}
+				{open || (props.keepHidden ?? true) ? props.children : null}
 			</div>
 		</div>
 	);
