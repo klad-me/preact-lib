@@ -25,3 +25,4 @@ export * from './InlineSpinner';
 export * from './Async';
 export * from './Colored';
 export * from './ColoredState';
+export * from './LanguageButton';

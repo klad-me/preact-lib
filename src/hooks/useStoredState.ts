@@ -6,12 +6,14 @@ type SetterArg<T> = T | ((prev: T) => T)
 type Setter<T> = (arg: SetterArg<T>) => void;
 
 
-export function useStoredState<T>(key: string, initialValue: T): [ T, Setter<T> ]
+export function useStoredState<T extends Object>(key: string, initialValue: T | (() => T)): [ T, Setter<T> ]
 {
 	const [ value, setValue ] = useState<T>( () => {
 		const saved = window.localStorage.getItem(key);
 		if (saved !== null)
 			return JSON.parse(saved) as T; else
+		if ('function' == typeof initialValue)
+			return initialValue();
 			return initialValue;
 	});
 
